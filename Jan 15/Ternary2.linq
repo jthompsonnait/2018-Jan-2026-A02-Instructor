@@ -24,6 +24,6 @@ Albums
 		Artist = a.Artist.Name,
 		Year = a.ReleaseYear
 	})
-	.OrderBy(a => a.Title)
+	.OrderBy(a => a.Label)
 	.ToList()
 	.Dump();
