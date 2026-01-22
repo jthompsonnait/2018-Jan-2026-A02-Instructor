@@ -29,7 +29,16 @@ Artists
 			Album = a.Title,
 			Label = a.ReleaseLabel,
 			Year = a.ReleaseYear,
-			SumTrackPrice = a.Tracks.Sum(t => t.UnitPrice)
+			SumTrackPrice = a.Tracks.Sum(t => t.UnitPrice),
+			Tracks = a.Tracks
+						.Select(t => new TrackView
+						{
+							TrackID = t.TrackId,
+							Name = t.Name,
+							Length	= t.Milliseconds,
+							Seconds = (int)t.Milliseconds/1000
+							
+						}).ToList()
 		}).ToList()
 	})
 	.ToList().Dump();
@@ -46,6 +55,15 @@ public class AlbumView
 	public string Label { get; set; }
 	public int Year { get; set; }
 	public decimal SumTrackPrice { get; set; }
+	public List<TrackView> Tracks { get; set; }
+}
+
+public class TrackView
+{
+	public int TrackID { get; set; }
+	public string Name { get; set; }
+	public int Length { get; set; }
+	public int Seconds { get; set; }
 }
 
 
