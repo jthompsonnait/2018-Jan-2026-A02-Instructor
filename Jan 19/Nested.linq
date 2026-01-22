@@ -20,11 +20,11 @@
 
 Artists
 	.OrderBy(x => x.Name)
-	.Select(x => new
+	.Select(x => new ArtistView
 			{
 		Artist = x.Name,
 		Albums = x.Albums.OrderBy(a => a.Title)
-		.Select(a => new
+		.Select(a => new AlbumView
 		{
 			Album = a.Title,
 			Label = a.ReleaseLabel,
@@ -33,6 +33,29 @@ Artists
 		}).ToList()
 	})
 	.ToList().Dump();
+	
+public class ArtistView
+{
+	public string Artist { get; set; }
+	public List<AlbumView> Albums { get; set; }
+}
+
+public class AlbumView
+{
+	public string Album { get; set; }
+	public string Label { get; set; }
+	public int Year { get; set; }
+	public decimal SumTrackPrice { get; set; }
+}
+
+
+
+
+
+
+
+
+
 	
 //Albums
 //	.OrderBy(a => a.Title)
